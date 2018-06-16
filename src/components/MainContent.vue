@@ -15,5 +15,7 @@ export default {
 <style>
 .main-content {
   background-color: #f6f8f9;
+  overflow: hidden;
+  overflow-y: auto;
 }
 </style>

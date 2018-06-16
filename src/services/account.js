@@ -10,12 +10,22 @@ function login(email, password) {
     .signInWithEmailAndPassword(email, password);
 }
 
+function logout() {
+  return firebase.auth().signOut();
+}
+
 function getCurrentUser() {
   return firebase.auth().currentUser;
+}
+
+function onAuthChange(callback) {
+  firebase.auth().onAuthStateChanged(callback);
 }
 
 export default {
   login,
   register,
   getCurrentUser,
+  logout,
+  onAuthChange,
 };

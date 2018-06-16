@@ -1,12 +1,10 @@
 <template>
-  <md-card class="chart">
-    <ve-line 
-      :extend="chartExtend" 
-      :data="smoothedData" 
-      :settings="chartSettings"
-    >
-    </ve-line>
-  </md-card>
+  <ve-line 
+    :extend="chartExtend" 
+    :data="smoothedData" 
+    :settings="chartSettings"
+  >
+  </ve-line>
 </template>
 
 <script>

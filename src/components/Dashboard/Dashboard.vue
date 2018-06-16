@@ -16,6 +16,7 @@ export default {
   name: 'dashboard',
   data: () => ({
     devices: [],
+    loading: true,
   }),
   components: {
     DeviceCard,
@@ -24,6 +25,7 @@ export default {
     deviceService.getAllDevices()
       .then((devices) => {
         this.devices = devices;
+        this.loading = false;
       });
   },
 };

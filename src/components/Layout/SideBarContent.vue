@@ -12,15 +12,25 @@
         <md-list-item @click="devices">Devices</md-list-item>
         <md-list-item @click="newDevice">New</md-list-item>
         <md-divider></md-divider>
-        <md-list-item @click="login">Login</md-list-item>
+        <md-list-item @click="login" v-if="!loggedIn">Login</md-list-item>
+        <md-list-item @click="logout" v-if="loggedIn">Logout</md-list-item>
       </md-list>
     </div>
   </div>
 </template>
 
 <script>
+import accountService from '../../services/account';
+
 export default {
   name: 'side-bar-content',
+  data: () => ({
+    loggedIn: false,
+  }),
+  mounted() {
+    this.loggedIn = !!accountService.getCurrentUser();
+    accountService.onAuthChange(this.userUpdated);
+  },
   methods: {
     devices() {
       this.$router.push('/');
@@ -30,6 +40,19 @@ export default {
     },
     login() {
       this.$router.push('/login');
+    },
+    logout() {
+      accountService.logout()
+        .then(() => {
+          this.$router.push('/login');
+        });
+    },
+    userUpdated(user) {
+      if (user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
     },
   },
 };

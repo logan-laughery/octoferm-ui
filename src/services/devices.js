@@ -57,8 +57,16 @@ function getDevice(deviceId) {
   });
 }
 
+function updateDevice(deviceId, temp, pump) {
+  const updates = {};
+  updates[`/devices/${deviceId}/pumpState`] = pump;
+  updates[`/devices/${deviceId}/temperature`] = temp;
+  return firebase.database().ref().update(updates);
+}
+
 export default {
   getDevice,
   getAllDevices,
   clearDeviceErrors,
+  updateDevice,
 };

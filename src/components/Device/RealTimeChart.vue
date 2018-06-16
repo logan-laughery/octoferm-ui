@@ -1,12 +1,10 @@
 <template>
-  <md-card class="chart">
-    <ve-line 
-      :extend="chartExtend" 
-      :data="smoothedData" 
-      :settings="chartSettings"
-    >
-    </ve-line>
-  </md-card>
+  <ve-line 
+    :extend="chartExtend" 
+    :data="smoothedData" 
+    :settings="chartSettings"
+  >
+  </ve-line>
 </template>
 
 <script>
@@ -93,7 +91,4 @@ export default {
 </script>
 
 <style>
-.chart {
-    padding-right: 20px;
-}
 </style>

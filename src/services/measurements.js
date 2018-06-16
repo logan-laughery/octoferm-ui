@@ -24,7 +24,20 @@ function getHistoricMeasurements(deviceId, callback) {
   });
 }
 
+function getLatestMeasurement(deviceId, callback) {
+  const measureRef = firebase.database().ref(`realTimeMeasurements/${deviceId}`)
+    .limitToLast(1);
+
+  measureRef.on('child_added', (data) => {
+    callback({
+      timestamp: data.key,
+      ...data.val(),
+    });
+  });
+}
+
 export default {
   getRealTimeMeasurements,
   getHistoricMeasurements,
+  getLatestMeasurement,
 };
