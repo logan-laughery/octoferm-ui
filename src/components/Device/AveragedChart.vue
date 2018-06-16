@@ -11,27 +11,22 @@
 
 <script>
 import measurementService from '../../services/measurements';
-import filtersService from '../../services/filters';
-
 
 export default {
-  name: 'real-time-chart',
+  name: 'averaged-chart',
   props: ['deviceId'],
   data: () => ({
     measurements: {
-      columns: ['timestamp', 'temperature', 'pump'],
+      columns: ['timestamp', 'temperature'],
       rows: [],
     },
     errors: [],
   }),
   computed: {
     smoothedData() {
-      const avgMeasurements = filtersService
-        .movingAverageFilter(this.measurements.rows, 9);
-
       return {
         columns: this.measurements.columns,
-        rows: filtersService.reduceFilter(avgMeasurements, 3),
+        rows: this.measurements.rows,
       };
     },
     chartExtend() {
@@ -50,8 +45,6 @@ export default {
       };
     },
     chartSettings() {
-      const self = this;
-
       return {
         xAxisType: 'time',
         scale: [true, false],
@@ -60,32 +53,17 @@ export default {
         },
         metrics: ['temperature'],
         dimension: ['timestamp'],
-        itemStyle: {
-          color: (item) => {
-            if (self.smoothedData &&
-              self.smoothedData.rows[item.dataIndex] &&
-              self.smoothedData.rows[item.dataIndex].pump) {
-              return 'blue';
-            }
-
-            return '#68d5af';
-          },
-        },
-        lineStyle: {
-          color: '#68d5af',
-        },
       };
     },
   },
   mounted() {
-    measurementService.getRealTimeMeasurements(this.deviceId, this.addMeasurement);
+    measurementService.getHistoricMeasurements(this.deviceId, this.addMeasurement);
   },
   methods: {
-    addMeasurement({ timestamp, t, p }) {
+    addMeasurement({ timestamp, temperature }) {
       this.measurements.rows.push({
         timestamp: timestamp * 1000,
-        temperature: Number(t),
-        pump: p,
+        temperature: Number(temperature),
       });
     },
   },

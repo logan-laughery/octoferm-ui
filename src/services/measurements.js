@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-function getMeasurements(deviceId, callback) {
+function getRealTimeMeasurements(deviceId, callback) {
   const measureRef = firebase.database().ref(`realTimeMeasurements/${deviceId}`)
     .limitToLast(1000);
 
@@ -12,6 +12,19 @@ function getMeasurements(deviceId, callback) {
   });
 }
 
+function getHistoricMeasurements(deviceId, callback) {
+  const measureRef = firebase.database().ref(`averagedMeasurements/${deviceId}`)
+    .limitToLast(1000);
+
+  measureRef.on('child_added', (data) => {
+    callback({
+      timestamp: data.key,
+      temperature: data.val(),
+    });
+  });
+}
+
 export default {
-  getMeasurements,
+  getRealTimeMeasurements,
+  getHistoricMeasurements,
 };

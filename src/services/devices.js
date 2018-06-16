@@ -44,7 +44,21 @@ function clearDeviceErrors(deviceId) {
   return firebase.database().ref().update(updates);
 }
 
+function getDevice(deviceId) {
+  const deviceRef = firebase.database().ref(`devices/${deviceId}`);
+
+  return deviceRef.once('value').then((snapshot) => {
+    const device = {
+      deviceId: snapshot.key,
+      ...snapshot.val(),
+    };
+
+    return getLastMeasurement(device);
+  });
+}
+
 export default {
+  getDevice,
   getAllDevices,
   clearDeviceErrors,
 };
