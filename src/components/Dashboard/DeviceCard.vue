@@ -1,9 +1,7 @@
 <template>
   <md-layout
     md-flex="50"
-    md-flex-xsmall 
-    md-flex-small="50" 
-    md-flex-medium="33"
+    md-flex-medium="100"
   >
     <div class="device-card">
       <md-card>

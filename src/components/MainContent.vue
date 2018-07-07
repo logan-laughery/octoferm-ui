@@ -18,4 +18,8 @@ export default {
   overflow: hidden;
   overflow-y: auto;
 }
+
+.main-content .md-layout {
+  width: 100%;
+}
 </style>

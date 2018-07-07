@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-side-bar md-whiteframe md-whiteframe-5dp">
+  <div class="fixed-side-bar md-whiteframe md-whiteframe-5dp md-hide-small">
     <side-bar-content/>
   </div>
 </template>

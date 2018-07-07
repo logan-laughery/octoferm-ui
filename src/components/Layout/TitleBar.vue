@@ -4,7 +4,7 @@
     class="md-toolbar dark-primary-color text-primary-color">
     <md-button
       v-on:click="menuClick"
-      class="md-icon-button menu-toggle">
+      class="md-icon-button menu-toggle md-hide-medium-and-up">
       <md-icon>menu</md-icon>
     </md-button>
     <h2 class="md-title">

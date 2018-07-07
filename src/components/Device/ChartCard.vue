@@ -1,6 +1,6 @@
 <template>
   <md-card class="chart">
-      <md-layout>
+      <md-layout class="chart-dropdown-layout">
         <md-select v-model="chartType" class="chart-dropdown">
           <md-option value="realTime">Real Time Measurements</md-option>
           <md-option value="average">Averaged Measurements</md-option>
@@ -34,6 +34,12 @@ export default {
   display: initial;
   width: 100%;
   height: fit-content;
+}
+
+@media (max-width: 660px) {
+  .chart-dropdown-layout {
+    height: 50px;
+  }
 }
 
 .chart-dropdown {

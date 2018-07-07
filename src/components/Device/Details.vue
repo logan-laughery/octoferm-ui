@@ -2,17 +2,19 @@
   <md-layout
     class="details"
   >
-      <md-layout md-flex="100" class="details-chart">
-        <chart-card :deviceId="deviceId"/>
-      </md-layout>
-      <md-layout class="details-device">
-        <md-layout md-flex="50" class="details-device-card">
+    <md-layout
+      class="md-gutter-16"
+    >
+        <md-layout md-flex="100" class="details-chart">
+          <chart-card :deviceId="deviceId"/>
+        </md-layout>
+        <md-layout md-flex="50" md-flex-medium="100" class="details-device-card">
           <device-card :deviceId="deviceId"/>
         </md-layout>
-        <md-layout md-flex="50" class="details-error-card">
+        <md-layout md-flex="50" md-flex-medium="100" class="details-error-card">
           <error-card :deviceId="deviceId"/>
         </md-layout>
-      </md-layout>
+    </md-layout>
   </md-layout>
 </template>
 
@@ -36,23 +38,12 @@ export default {
 
 <style>
 .details {
+    margin: 16px;
+    width: calc(100vw - 32px);
     align-content:flex-start;
 }
 
-.details-chart {
-  padding: 30px;
-}
-
-.details-device {
-  padding: 30px;
-  padding-top: 0px;
-}
-
-.details-device-card {
-  padding-right: 15px;
-}
-
-.details-error-card {
-  padding-left: 15px;
+.details .md-gutter-16 > .md-layout {
+  margin-bottom: 16px;
 }
 </style>

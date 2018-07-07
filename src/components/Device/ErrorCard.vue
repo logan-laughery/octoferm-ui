@@ -47,12 +47,15 @@ export default {
       const start = this.pageNumber * this.size;
       const end = start + this.size;
 
-      return this.errors.reverse().slice(start, end);
+      return this.errors
+        .sort((a, b) => b.rawTimestamp - a.rawTimestamp)
+        .slice(start, end);
     },
   },
   methods: {
     addError(error) {
       this.errors.push({
+        rawTimestamp: error.timestamp,
         timestamp: new Date(error.timestamp * 1000).toLocaleString(),
         message: error.message,
       });
@@ -73,6 +76,7 @@ export default {
 <style>
 
 .error-card {
+  max-width: calc(100vw - 32px);
   width: 100%;
   height: fit-content;
 }
